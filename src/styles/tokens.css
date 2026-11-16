@@ -1,0 +1,31 @@
+:root {
+  color-scheme: light;
+  /* surfaces */
+  --desk: #F5F3EE;  --sheet: #FAF9F6;  --paper: #FFFFFF;  --track: #ECE9E2;
+  --hairline: rgba(28, 25, 23, 0.09);  --hairline-strong: rgba(28, 25, 23, 0.16);
+  /* text */
+  --ink: #1C1917;  --ink-2: #6E6A63;  --ink-3: #9A958C;            /* ink-3: placeholders, disabled only */
+  /* accent (usage list in §1.2) */
+  --accent: #1B56DB;  --accent-hover: #1647B5;  --accent-press: #123B97;  --on-accent: #FFFFFF;
+  --focus-ring: 0 0 0 3px rgba(27, 86, 219, 0.28);
+  /* status (text and icon color only, never fills) */
+  --warn: #8A5A12;  --danger: #B3261E;
+  /* type */
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  --fs-11: 11px/14px var(--font);  --fs-12: 12px/16px var(--font);  --fs-13: 13px/18px var(--font);
+  --fs-15: 15px/22px var(--font);  --fs-20: 20px/26px var(--font);  --fs-prompt: 500 56px/1 var(--font);
+  /* shape & space (4-pt scale) */
+  --r-6: 6px;  --r-8: 8px;  --r-12: 12px;  --r-pill: 999px;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px;
+  --shadow-sheet: 0 1px 2px rgba(28, 25, 23, 0.06), 0 10px 24px -14px rgba(28, 25, 23, 0.20);
+  --shadow-pop: 0 1px 2px rgba(28, 25, 23, 0.08), 0 12px 28px -12px rgba(28, 25, 23, 0.24);
+  /* motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);  --dur: 180ms;
+  /* layout */
+  --bar-h: 48px;  --rail-w: 280px;  --card-w: 640px;  --card-h: 480px;  --gallery-h: 168px;
+  --z-bar: 20;  --z-rail: 15;  --z-pop: 40;  --z-modal: 50;  --z-toast: 60;
+}
+html, body, #root { height: 100%; margin: 0; background: var(--desk); color: var(--ink); font: var(--fs-13); }
+.num { font-variant-numeric: tabular-nums; }                   /* applied to every readout, counter, and progress label */
+@media (prefers-reduced-motion: reduce) { :root { --dur: 0ms; } }
