@@ -1,0 +1,1 @@
+export const DEMO_CAPTURED_AT = '2000-01-01T00:00:00.000Z';
