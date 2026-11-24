@@ -1,0 +1,30 @@
+.workspace {
+  position: fixed;
+  inset: var(--bar-h) 0 0;
+  overflow: hidden;
+  background: var(--desk);
+}
+
+.view {
+  width: 100%;
+  height: 100%;
+  animation: arrive var(--dur) var(--ease) both;
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(var(--s1));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .view {
+    animation: none;
+  }
+}

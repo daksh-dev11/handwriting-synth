@@ -1,0 +1,160 @@
+.group {
+  display: grid;
+  gap: var(--s2);
+  padding-bottom: var(--s3);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.group h2 {
+  margin: 0 0 var(--s1);
+  color: var(--ink-2);
+  font: 600 var(--fs-11);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.locked {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.locked button {
+  cursor: default;
+}
+
+.helper,
+.caption {
+  margin: 0;
+  color: var(--ink-2);
+  font: var(--fs-11);
+}
+
+.seedRow {
+  display: grid;
+  grid-template-columns: auto minmax(64px, 1fr) auto;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.pageLimit {
+  display: grid;
+  grid-template-columns: 1fr 32px 28px 32px;
+  align-items: center;
+  gap: var(--s1);
+}
+
+.pageLimit > span:first-child {
+  color: var(--ink);
+}
+
+.pageLimit > span:not(:first-child) {
+  text-align: center;
+  color: var(--ink-2);
+}
+
+.seedRow label {
+  color: var(--ink);
+}
+
+.seedRow input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: var(--s1);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-6);
+  background: var(--paper);
+  color: var(--ink);
+  font: var(--fs-12);
+  font-family: var(--mono);
+}
+
+.seedRow input:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.templateGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s2);
+}
+
+.template {
+  display: grid;
+  min-width: 0;
+  gap: var(--s1);
+  justify-items: center;
+  padding: var(--s1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-6);
+  background: transparent;
+  color: var(--ink);
+  font: var(--fs-11);
+  cursor: pointer;
+}
+
+.template:disabled,
+.inkChoice:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.selected {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.miniSheet {
+  width: 100%;
+  aspect-ratio: 120 / 64;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-6);
+  background-color: var(--paper);
+}
+
+.ruled {
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 10px, var(--hairline-strong) 11px);
+}
+
+.grid {
+  background-image: linear-gradient(var(--hairline) 1px, transparent 1px), linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+.dotted {
+  background-image: radial-gradient(var(--ink-3) 1px, transparent 1px);
+  background-size: 9px 9px;
+}
+
+.cornell {
+  background-image: linear-gradient(to right, transparent 38%, var(--hairline-strong) 39%, transparent 40%), repeating-linear-gradient(to bottom, transparent 0, transparent 10px, var(--hairline-strong) 11px);
+}
+
+.inks {
+  display: flex;
+  gap: var(--s3);
+}
+
+.inkChoice {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.inkSelected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--paper) inset;
+}
+
+.inkChoice span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--swatch);
+}

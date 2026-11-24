@@ -12,9 +12,10 @@ export interface SegmentedProps {
   value: string;
   onChange(value: string): void;
   className?: string;
+  ariaKeyShortcuts?: string;
 }
 
-export function Segmented({ label, options, value, onChange, className }: SegmentedProps) {
+export function Segmented({ label, options, value, onChange, className, ariaKeyShortcuts }: SegmentedProps) {
   const selectedIndex = Math.max(0, options.findIndex((option) => option.value === value));
   const thumbStyle: CSSProperties = {
     width: `calc((100% - 4px) / ${Math.max(options.length, 1)})`,
@@ -42,6 +43,7 @@ export function Segmented({ label, options, value, onChange, className }: Segmen
       className={[styles.track, className].filter(Boolean).join(' ')}
       role="radiogroup"
       aria-label={label}
+      aria-keyshortcuts={ariaKeyShortcuts}
       onKeyDown={onKeyDown}
     >
       <span className={styles.thumb} style={thumbStyle} aria-hidden="true" />

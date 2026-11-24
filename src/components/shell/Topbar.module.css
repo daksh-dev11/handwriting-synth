@@ -1,0 +1,171 @@
+.bar {
+  position: fixed;
+  z-index: var(--z-bar);
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  height: var(--bar-h);
+  align-items: center;
+  gap: var(--s3);
+  box-sizing: border-box;
+  padding: 0 var(--s4);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--sheet);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  white-space: nowrap;
+}
+
+.brand strong {
+  font: 600 var(--fs-15);
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background: var(--hairline-strong);
+}
+
+.mode {
+  width: min(288px, 30vw);
+  flex: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-left: auto;
+}
+
+.menu {
+  position: relative;
+  color: var(--ink);
+  font: 500 var(--fs-13);
+}
+
+.menu summary {
+  display: grid;
+  min-height: 32px;
+  align-items: center;
+  padding: 0 var(--s3);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-6);
+  background: var(--paper);
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.moreLabel {
+  display: none;
+}
+
+.mobileDemo {
+  display: none;
+}
+
+.menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.menu summary[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.menuItems {
+  position: absolute;
+  z-index: var(--z-pop);
+  top: calc(100% + var(--s2));
+  right: 0;
+  display: grid;
+  min-width: 180px;
+  gap: var(--s1);
+  padding: var(--s2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-12);
+  background: var(--paper);
+  box-shadow: var(--shadow-pop);
+}
+
+.menuItems button {
+  min-height: 32px;
+  padding: 0 var(--s2);
+  border: 0;
+  border-radius: var(--r-6);
+  background: transparent;
+  color: var(--ink);
+  font: var(--fs-13);
+  text-align: left;
+  cursor: pointer;
+}
+
+.menuItems button:hover:not(:disabled) {
+  background: var(--track);
+}
+
+.menuItems button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.fileInput {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .bar {
+    gap: var(--s2);
+    padding: 0 var(--s2);
+  }
+
+  .brand strong {
+    font: 600 var(--fs-13);
+  }
+
+  .mode {
+    width: min(250px, 32vw);
+  }
+
+  .actions > :first-child {
+    display: none;
+  }
+
+  .menuLabel {
+    display: none;
+  }
+
+  .moreLabel {
+    display: inline;
+  }
+
+  .menu summary {
+    min-width: 32px;
+    justify-items: center;
+    padding: 0 var(--s2);
+  }
+
+  .mobileDemo {
+    display: block;
+  }
+}
+
+@media (max-width: 620px) {
+  .bar {
+    gap: var(--s1);
+  }
+
+  .brand {
+    gap: var(--s2);
+  }
+
+  .mode {
+    width: min(184px, 42vw);
+  }
+}

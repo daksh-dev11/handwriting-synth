@@ -1,0 +1,14 @@
+.actions {
+  display: flex;
+  width: min(100%, var(--card-w));
+  justify-content: center;
+  align-items: center;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 620px) {
+  .actions {
+    gap: var(--s1);
+  }
+}

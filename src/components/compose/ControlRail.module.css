@@ -1,0 +1,27 @@
+.rail {
+  display: grid;
+  min-width: 0;
+  gap: var(--s3);
+  overflow: auto;
+  padding: var(--s4);
+  border-left: 1px solid var(--hairline);
+  background: var(--sheet);
+}
+
+@media (max-width: 900px) {
+  .rail {
+    display: none;
+  }
+
+  .open {
+    position: absolute;
+    z-index: var(--z-rail);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    width: min(var(--rail-w), 82vw);
+    box-sizing: border-box;
+    box-shadow: var(--shadow-pop);
+  }
+}

@@ -18,6 +18,13 @@ import { DRAFT_MS, SETTINGS_MS } from './timing';
 import { useAppStore } from './useAppStore';
 
 let removePreviousSubscription: (() => void) | null = null;
+let bootGeneration = 0;
+
+export function disposeBoot(): void {
+  bootGeneration += 1;
+  removePreviousSubscription?.();
+  removePreviousSubscription = null;
+}
 
 function recordOf(value: unknown): Record<string, unknown> {
   return typeof value === 'object' && value !== null
@@ -81,17 +88,22 @@ async function acquireWriterLock(): Promise<void> {
 }
 
 export async function boot(client: WorkerClient): Promise<void> {
-  removePreviousSubscription?.();
-  removePreviousSubscription = null;
+  disposeBoot();
+  const generation = bootGeneration;
 
   const state = useAppStore.getState();
   state.setClient(client);
   const db = await openDb();
+  if (generation !== bootGeneration) {
+    db.idb?.close();
+    return;
+  }
   state.setDb(db);
   db.onClose = () => useAppStore.getState().setPersistenceAvailable(false);
   state.setPersistenceAvailable(db.idb !== null);
   state.setReadOnly(false);
   await acquireWriterLock();
+  if (generation !== bootGeneration) return;
 
   try {
     const [sessionMeta, settingsMeta, draftMeta] = await Promise.all([
@@ -99,6 +111,7 @@ export async function boot(client: WorkerClient): Promise<void> {
       get<unknown>(db, 'meta', 'settings'),
       get<unknown>(db, 'meta', 'draft'),
     ]);
+    if (generation !== bootGeneration) return;
     const savedSession = recordOf(sessionMeta);
     const savedSettings = recordOf(settingsMeta);
     const variance = sanitizeVariance(savedSettings.variance ?? DEFAULT_VARIANCE);
@@ -124,6 +137,7 @@ export async function boot(client: WorkerClient): Promise<void> {
     });
 
     const entries = await loadAllRaw(db);
+    if (generation !== bootGeneration) return;
     const valid: RawGlyphSample[] = [];
     const quarantined: string[] = [];
     for (const [key, value] of entries) {
@@ -143,6 +157,7 @@ export async function boot(client: WorkerClient): Promise<void> {
 
     const fingerprint = computeFingerprint(sortedRaw(valid));
     const cachedValue = await loadPackCache(db);
+    if (generation !== bootGeneration) return;
     let acceptedCache: { pack: GlyphPack; fingerprint: string } | null = null;
     if (isPackCacheRecord(cachedValue)) {
       const record = recordOf(cachedValue);
@@ -163,6 +178,7 @@ export async function boot(client: WorkerClient): Promise<void> {
       try {
         const revision = useAppStore.getState().revision + 1;
         await client.loadPack(acceptedCache.pack, revision);
+        if (generation !== bootGeneration) return;
         useAppStore.getState().setPackFromCache(acceptedCache.pack, acceptedCache.fingerprint);
       } catch (error) {
         showRestoreFailure(error);
@@ -171,6 +187,7 @@ export async function boot(client: WorkerClient): Promise<void> {
       }
     } else if (valid.length > 0) {
       await useAppStore.getState().rebuildNow();
+      if (generation !== bootGeneration) return;
     } else {
       useAppStore.setState({ packStatus: 'none' });
     }
@@ -245,6 +262,7 @@ export async function boot(client: WorkerClient): Promise<void> {
       if (typeof window !== 'undefined') window.removeEventListener('pagehide', flush);
     };
   } catch (error) {
+    if (generation !== bootGeneration) return;
     showRestoreFailure(error);
     useAppStore.getState().setMode('write');
   }
