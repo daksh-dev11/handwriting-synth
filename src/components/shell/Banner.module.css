@@ -1,0 +1,55 @@
+.banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid var(--hairline);
+  border-left: 3px solid currentColor;
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--warn);
+}
+
+.danger {
+  color: var(--danger);
+}
+
+.warning {
+  color: var(--warn);
+}
+
+.danger .mark,
+.danger .title {
+  color: var(--danger);
+}
+
+.warning .mark,
+.warning .title {
+  color: var(--warn);
+}
+
+.mark {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  place-items: center;
+  font-weight: 600;
+}
+
+.content {
+  min-width: 0;
+  color: var(--ink);
+}
+
+.title {
+  display: block;
+  margin-bottom: 2px;
+  color: inherit;
+}
+
+.body {
+  color: var(--ink);
+}

@@ -1,0 +1,63 @@
+.overlay {
+  position: fixed;
+  z-index: var(--z-modal);
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(28, 25, 23, 0.32);
+}
+
+.dialog {
+  width: min(100%, 420px);
+  box-sizing: border-box;
+  padding: 20px;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background: var(--paper);
+  box-shadow: var(--shadow-pop);
+}
+
+.title {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font: 500 var(--fs-15);
+}
+
+.message {
+  color: var(--ink-2);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.cancel,
+.confirm {
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font: 500 var(--fs-13);
+  cursor: pointer;
+}
+
+.cancel {
+  border: 1px solid var(--hairline-strong);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.confirm {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.cancel:focus-visible,
+.confirm:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}

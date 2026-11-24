@@ -1,0 +1,40 @@
+.track {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: 28px;
+  box-sizing: border-box;
+  padding: 2px;
+  border-radius: 8px;
+  background: var(--track);
+  isolation: isolate;
+}
+
+.thumb {
+  position: absolute;
+  z-index: 0;
+  inset: 2px auto 2px 2px;
+  border-radius: 6px;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--hairline), 0 1px 1px rgba(28, 25, 23, 0.08);
+  transition: transform var(--dur) var(--ease);
+}
+
+.option {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  font: var(--fs-12);
+  cursor: pointer;
+}
+
+.option:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
